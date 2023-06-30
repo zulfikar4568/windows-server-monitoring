@@ -1,0 +1,25 @@
+global:
+  resolve_timeout: 5m
+  
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 1m
+  repeat_interval: 1m
+  receiver: 'email'
+receivers:
+  - name: 'email'
+    email_configs:
+    - send_resolved: true
+      to: 'isnaen70@gmail.com'
+      from: 'isnaen71@gmail.com'
+      smarthost: smtp.gmail.com:587
+      auth_username: 'isnaen71@gmail.com'
+      auth_identity: 'isnaen71@gmail.com'
+      auth_password: 'qmylpgpggsxjerox'
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']

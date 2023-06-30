@@ -1,0 +1,31 @@
+groups:
+  - name: custom_rules
+    rules:
+      - record: cpu_usage_of_wmi_exporter
+        expr: 100 - (avg by (instance) (irate(windows_cpu_time_total{mode="idle"}[1m])) * 100)
+      - record: memory_usage_of_wmi_exporter
+        expr: (windows_cs_physical_memory_bytes - windows_os_physical_memory_free_bytes) / windows_cs_physical_memory_bytes * 100
+  - name: alert_rules
+    rules:
+      - alert: instance_down
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance [{{ $labels.instance }}] down"
+          description: "[{{ $labels.instance }}] of job [{{ $labels.job }}] has been down for more than 1 minute."
+      - alert: memory_greater_than_equal_70
+        expr: memory_usage_of_wmi_exporter >= 70
+        labels:
+          severity: warning
+        annotations:
+          summary: "Instance [{{ $labels.instance }}] has 70% usage of memory"
+          description: "[{{ $labels.instance }}] has use {{ $value }}% usage of memory."
+      - alert: cpu_greater_than_equal_70
+        expr: cpu_usage_of_wmi_exporter >= 70
+        labels:
+          severity: warning
+        annotations:
+          summary: "Instance [{{ $labels.instance }}] has 70% usage of cpu"
+          description: "[{{ $labels.instance }}] has use {{ $value }}% usage of cpu."
