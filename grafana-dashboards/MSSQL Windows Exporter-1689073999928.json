@@ -1638,7 +1638,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^{instance=\"10.1.12.46:9182\", job=\"Win\"}$/",
+          "fields": "",
           "values": false
         },
         "showThresholdLabels": false,
@@ -1720,7 +1720,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^{instance=\"10.1.12.46:9182\", job=\"Win\"}$/",
+          "fields": "",
           "values": false
         },
         "showThresholdLabels": false,
@@ -5300,6 +5300,6 @@
   "timezone": "browser",
   "title": "MSSQL Windows Exporter",
   "uid": "xButrvtZk",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
