@@ -4,11 +4,41 @@
 We will install Prometheus, Loki, Promtail as a Windows Service, then you need to download nssm.exe in [here](https://nssm.cc/download)
 
 ## Install Windows Exporter
-We will install Windows exporter you can download in [here](https://github.com/prometheus-community/windows_exporter/releases/tag/v0.22.0) for example I'm download `windows_exporter-0.22.0-amd64.msi`. Then you move to `C:\Program Files\Windows Exporter`
+We will install Windows exporter you can download in [here](https://github.com/prometheus-community/windows_exporter/releases/tag/v0.22.0) for example I'm download `windows_exporter-0.22.0-amd64.exe`. Then you move to `C:\Program Files\Windows Exporter`, and rename to `windows_exporter.exe`
+### See list of Service Status
+Open Power Shell
+```bash
+ Get-Service
+```
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/5ae9ef71-a5c9-4310-87dd-e510fffff15b)
+
+### See list of Processes
+Open Power Shell
+```bash
+Get-Process
+```
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/a61ea48e-4e84-49c0-8a8e-e416285f6993)
+### Create config file `config.yaml`
+```yaml
+collectors:
+  enabled: cpu,cpu_info,cs,logical_disk,memory,net,os,service,system,process,iis,time
+collector:
+  service:
+    services-where: "Name='W3SVC' OR  Name='AppHostSVC' OR Name='IISADMIN' OR Name='MSFTPSVC' OR Name='MWMSVC' OR Name='WAS' OR Name='FTPSVC' OR Name='Opcenter Connect MOM Channel Adapter Host' OR Name='Opcenter Connect MOM Client Gateway'"
+  process:
+    include: "^w3wp|^W3WP|^MIOClientGatewayService|^CIOAdapterHostService"
+  textfile:
+    directory: "C:\\custom_metrics"
+telemetry:
+  path: "/metrics"
+web:
+  listen-address: ":9182"
+```
+### Installing WMI
 Open Command Promt (CMD)
 ```bash
-# We need to enabled some metrics to the installer
-msiexec /i "C:\Program Files\Windows Exporter\windows_exporter.msi" LISTEN_PORT=9182 ENABLED_COLLECTORS=ad,adcs,adfs,cache,cpu,cpu_info,cs,container,dfsr,dhcp,dns,exchange,fsrmquota,hyperv,iis,logical_disk,logon,memory,msmq,mssql,netframework_clrexceptions,netframework_clrinterop,netframework_clrjit,netframework_clrloading,netframework_clrlocksandthreads,netframework_clrmemory,netframework_clrremoting,netframework_clrsecurity,net,os,process,remote_fx,service,smtp,tcp,time,thermalzone,terminal_services,vmware TEXTFILE_DIR="C:\custom_metrics"
+nssm.exe install windows_exporter "C:\Program Files\Windows Exporter\windows_exporter.exe" --config.file=config.yaml
+sc start windows_exporter
 ```
 ![image](https://user-images.githubusercontent.com/64786139/250080033-d2b15ee3-9438-4344-a75e-7ec890aaf64d.png)
 
