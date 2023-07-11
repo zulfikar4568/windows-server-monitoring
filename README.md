@@ -9,9 +9,6 @@ Open Command Promt (CMD)
 ```bash
 # We need to enabled some metrics to the installer
 msiexec /i "C:\Program Files\Windows Exporter\windows_exporter.msi" LISTEN_PORT=9182 ENABLED_COLLECTORS=ad,adcs,adfs,cache,cpu,cpu_info,cs,container,dfsr,dhcp,dns,exchange,fsrmquota,hyperv,iis,logical_disk,logon,memory,msmq,mssql,netframework_clrexceptions,netframework_clrinterop,netframework_clrjit,netframework_clrloading,netframework_clrlocksandthreads,netframework_clrmemory,netframework_clrremoting,netframework_clrsecurity,net,os,process,remote_fx,service,smtp,tcp,time,thermalzone,terminal_services,vmware TEXTFILE_DIR="C:\custom_metrics"
-
-nssm.exe install windows_exporter "C:\Program Files\windows_exporter\windows_exporter.exe"
-sc start windows_exporter
 ```
 ![image](https://user-images.githubusercontent.com/64786139/250080033-d2b15ee3-9438-4344-a75e-7ec890aaf64d.png)
 
