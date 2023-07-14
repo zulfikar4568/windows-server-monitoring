@@ -1,0 +1,663 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_MICROSOFT_SQL SERVER",
+      "label": "Microsoft SQL Server",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "mssql",
+      "pluginName": "Microsoft SQL Server"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.1"
+    },
+    {
+      "type": "datasource",
+      "id": "mssql",
+      "name": "Microsoft SQL Server",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "${DS_MICROSOFT_SQL SERVER}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 8
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "dataset": "ExCoreOLTP",
+          "datasource": {
+            "type": "mssql",
+            "uid": "${DS_MICROSOFT_SQL SERVER}"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT TOP(50) COUNT(*) FROM ExCoreOLTP.ExCoreOLTPSchema.ActiveUserSession ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "COUNT",
+                "parameters": [
+                  {
+                    "name": "*",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [],
+            "limit": 50
+          },
+          "table": "ExCoreOLTPSchema.ActiveUserSession"
+        }
+      ],
+      "title": "License Usage",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "${DS_MICROSOFT_SQL SERVER}"
+      },
+      "description": "Number of Container",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 5,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "dataset": "ExCoreOLTP",
+          "datasource": {
+            "type": "mssql",
+            "uid": "${DS_MICROSOFT_SQL SERVER}"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawSql": "SELECT TOP(50) COUNT(*) FROM ExCoreOLTP.ExCoreOLTPSchema.Container ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "COUNT",
+                "parameters": [
+                  {
+                    "name": "*",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "ExCoreOLTPSchema.Container"
+        }
+      ],
+      "title": "Total Container",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "${DS_MICROSOFT_SQL SERVER}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 14,
+        "x": 10,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mssql",
+            "uid": "${DS_MICROSOFT_SQL SERVER}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n    count(*) AS \"TOTAL RESOURCE\",\r\n    sum(case when RSC.Availability = 1 then 1 else 0 end) AS UP,\r\n    sum(case when RSC.Availability = 0 then 1 else 0 end) AS DOWN,\r\n    sum(case when RSC.Availability IS NULL then 1 else 0 end) AS \"N/A\"\r\nFROM\r\n    [ExCoreOLTP].[ExCoreOLTPSchema].ResourceDef R\r\n    LEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ResourceType RT ON R.ResourceTypeId = RT.ResourceTypeId\r\n    LEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ProductionStatus PS ON R.ProductionStatusId = PS.ProductionStatusId\r\n    LEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ResourceStatusCode RSC ON PS.StatusId = RSC.ResourceStatusCodeId",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Resource Status Availability Counter",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "${DS_MICROSOFT_SQL SERVER}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "LastCompletionDate"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 181
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "FirstStartDate"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 222
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Seq"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 36
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "OrderType"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MfgOrderQty"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 118
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TotalContainer"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mssql",
+            "uid": "${DS_MICROSOFT_SQL SERVER}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n\t\t\tROW_NUMBER () OVER (ORDER BY MO.MfgOrderName) Seq\r\n\t\t\t, PB2.ProductName  + ':' + P.ProductRevision Product\r\n\t\t\t, MO.MfgOrderName MfgOrder\r\n\t\t\t, OT.OrderTypeName OrderType\r\n\t\t\t, MO.PlannedStartDate\r\n\t\t\t, MO.PlannedCompletionDate\r\n\t\t\t, C.FactoryStartDate FirstStartDate\r\n\t\t\t, C.LastCompletionDate\r\n\t\t\t, ISNULL(MO.Qty, 0) MfgOrderQty\r\n\t\t\t, C.TotalContainer\r\n\t\t\t, ISNULL(C.FactoryStartQty, 0) TotalQtyStarted\r\n\t\t\t, ISNULL(C.Qty, 0) TotalQty\r\n\t\t\t, CASE WHEN ISNULL(MO.Qty, 0) > ISNULL(C.FactoryStartQty, 0) THEN ISNULL(MO.Qty, 0) - ISNULL(C.FactoryStartQty, 0) ELSE 0 END TotalQtyPending\r\n\t\t\t, CASE WHEN ISNULL(C.FactoryStartQty, 0) > ISNULL(C.Qty, 0) THEN ISNULL(C.FactoryStartQty, 0) - ISNULL(C.Qty, 0) ELSE 0 END TotalQtyRejected\r\n\t\t\t, ISNULL(C.TotalQtyInProcess, 0) TotalQtyInProcess\r\n\t\t\t, ISNULL(C.TotalQtyCompleted, 0) TotalQtyCompleted\r\n\t\tFROM\r\n\t\t\tMfgOrder MO\r\n\t\t\tLEFT OUTER JOIN OrderType OT ON MO.OrderTypeId = OT.OrderTypeId\r\n\t\t\tLEFT OUTER JOIN OrderStatus OS ON MO.OrderStatusId = OS.OrderStatusId\r\n\t\t\tLEFT OUTER JOIN ProductBase PB ON MO.ProductBaseId = PB.ProductBaseId\r\n\t\t\tLEFT OUTER JOIN Product P ON PB.RevOfRcdId = P.ProductId OR MO.ProductId = P.ProductId\r\n\t\t\tLEFT OUTER JOIN ProductBase PB2 ON P.ProductBaseId = PB2.ProductBaseId\r\n\t\t\tLEFT OUTER JOIN\r\n\t\t\t(\r\n\t\t\t\tSELECT\r\n\t\t\t\t\tC.MfgOrderId\r\n\t\t\t\t\t, COUNT(C.ContainerName) TotalContainer\r\n\t\t\t\t\t, MIN(SO.SalesOrderName) SalesOrder\r\n\t\t\t\t\t, SUM(C.Qty) Qty\r\n\t\t\t\t\t, SUM(C.Qty2) Qty2\r\n\t\t\t\t\t, MIN(CS.WorkflowStepId) WorkflowStepId\r\n\t\t\t\t\t, MIN(CS.FactoryId) FactoryId\r\n\t\t\t\t\t, MIN(C.FactoryStartDate) FactoryStartDate\r\n\t\t\t\t\t, SUM(C.FactoryStartQty) FactoryStartQty\r\n\t\t\t\t\t, SUM(C.FactoryStartQty2) FactoryStartQty2\r\n\t\t\t\t\t, MAX(CASE WHEN WS.IsLastStep = 1 THEN CS.LastMoveDate ELSE NULL END) LastCompletionDate\r\n\t\t\t\t\t, SUM(CASE WHEN WS.IsLastStep = 0 AND C.Status = 1 THEN ISNULL(C.Qty, 0) ELSE 0 END) TotalQtyInProcess\r\n\t\t\t\t\t, SUM(CASE WHEN WS.IsLastStep = 0 AND C.Status = 1 THEN ISNULL(C.Qty2, 0) ELSE 0 END) TotalQty2InProcess\r\n\t\t\t\t\t, SUM(CASE WHEN WS.IsLastStep = 1 THEN ISNULL(C.Qty, 0) ELSE 0 END) TotalQtyCompleted\r\n\t\t\t\t\t, SUM(CASE WHEN WS.IsLastStep = 1 THEN ISNULL(C.Qty2, 0) ELSE 0 END) TotalQty2Completed\r\n\t\t\t\tFROM\r\n\t\t\t\t\tContainer C\r\n\t\t\t\t\tINNER JOIN CurrentStatus CS ON C.CurrentStatusId = CS.CurrentStatusId\r\n\t\t\t\t\tINNER JOIN WorkflowStep WS ON CS.WorkflowStepId = WS.WorkflowStepId\r\n\t\t\t\t\tLEFT OUTER JOIN SalesOrder SO ON C.SalesOrderId = SO.SalesOrderId\r\n\t\t\t\tWHERE\r\n\t\t\t\t\tC.ParentContainerId IS NULL\r\n\t\t\t\tGROUP BY\r\n\t\t\t\t\tC.MfgOrderId\r\n\t\t\t) C ON MO.MfgOrderId = C.MfgOrderId\r\n\t\t\tLEFT OUTER JOIN Factory MO_F2 ON MO.ReportingFactoryId = MO_F2.FactoryId\r\n\t\t\tLEFT OUTER JOIN Factory F ON C.FactoryId = F.FactoryId",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Manufacturing Order Status",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "${DS_MICROSOFT_SQL SERVER}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Resource Family"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 150
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Seq"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 41
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Resource"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 257
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 267
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Availability"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 99
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Last Status Change"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 185
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Maintenance Type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 274
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mssql",
+            "uid": "${DS_MICROSOFT_SQL SERVER}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n\t\tROW_NUMBER() OVER (ORDER BY R.ResourceName) Seq\r\n\t\t, R.ResourceName Resource\r\n\t\t, CASE WHEN R.[Description] IS NULL THEN '-' ELSE R.[Description] END \"Description\"\r\n\t\t, CASE WHEN RF.ResourceFamilyName IS NULL THEN '-' ELSE RF.ResourceFamilyName END \"Resource Family\"\r\n\t\t, CASE WHEN PS.LastStatusChangeDate IS NULL THEN '-' ELSE CONVERT(VARCHAR(20),PS.LastStatusChangeDate,100) END \"Last Status Change\"\r\n\t\t, CASE WHEN RSC.Availability = 1 THEN 'Up' WHEN RSC.Availability = 2 THEN 'Down' ELSE '-' END Availability\r\n\t\t, CASE WHEN RSR.ResourceStatusReasonName IS NULL THEN '-' ELSE RSR.ResourceStatusReasonName END \"Reason\"\r\n\t    , CASE WHEN MC.MaintenanceClassName IS NULL THEN '-' ELSE MC.MaintenanceClassName END \"Maintenance Class\"\r\n\t\t, CASE WHEN ISNULL(L.LabelValue, MR_CD.CDOName) IS NULL THEN '-' ELSE ISNULL(L.LabelValue, MR_CD.CDOName) END \"Maintenance Type\"\r\n\t\t, CASE WHEN MRB.MaintenanceReqName IS NULL THEN '-' ELSE MRB.MaintenanceReqName + ':' + MR.Revision END \"Maintenance Req\"\r\n\t\t, CASE WHEN AMR.ActivationDate IS NULL THEN '-' ELSE CONVERT(VARCHAR(20),AMR.ActivationDate,100) END \"Maintenance Activation\"\r\n\t\t, CASE WHEN MR.ScheduleDate IS NOT NULL AND GETDATE() >= MR.ScheduleDate + ISNULL(MR.TolerancePeriod, 0) THEN 'Past Due'\r\n\t\t\t\tWHEN MR.ScheduleDate IS NOT NULL AND GETDATE() >= MR.ScheduleDate THEN 'Due'\r\n\t\t\t\tWHEN MR.ScheduleDate IS NOT NULL AND GETDATE() >= MR.ScheduleDate - ISNULL(MR.WarningPeriod, 0) THEN 'Pending'\r\n\t\t\t\tWHEN MS.NextDateDue IS NOT NULL AND GETDATE() >= MS.NextDateDue + ISNULL(MR.TolerancePeriod, 0) THEN 'Past Due'\r\n\t\t\t\tWHEN MS.NextDateDue IS NOT NULL AND GETDATE() >= MS.NextDateDue THEN 'Due'\r\n\t\t\t\tWHEN MS.NextDateDue IS NOT NULL AND GETDATE() >= MS.NextDateDue - ISNULL(MR.WarningPeriod, 0) THEN 'Pending'\r\n\t\t\t\tWHEN MR.ToleranceQty IS NOT NULL AND (PS.TotalThruputQty - MS.LastThruputQty + MS.ThruputQtyAdjustment) >= MR.Qty + MR.ToleranceQty THEN 'Past Due'\r\n\t\t\t\tWHEN MR.ToleranceQty IS NOT NULL AND (PS.TotalThruputQty - MS.LastThruputQty + MS.ThruputQtyAdjustment) >= MR.Qty THEN 'Due'\r\n\t\t\t\tWHEN MR.ToleranceQty IS NOT NULL AND (PS.TotalThruputQty - MS.LastThruputQty + MS.ThruputQtyAdjustment) >= MR.Qty - MR.WarningQty THEN 'Pending'\r\n\t\t\t\tWHEN MR.ToleranceQty2 IS NOT NULL AND (PS.TotalThruputQty2 - MS.LastThruputQty2 + MS.ThruputQty2Adjustment) >= MR.Qty2 + MR.ToleranceQty2 THEN 'Past Due'\r\n\t\t\t\tWHEN MR.ToleranceQty2 IS NOT NULL AND (PS.TotalThruputQty2 - MS.LastThruputQty2 + MS.ThruputQty2Adjustment) >= MR.Qty2 THEN 'Due'\r\n\t\t\t\tWHEN MR.ToleranceQty2 IS NOT NULL AND (PS.TotalThruputQty2 - MS.LastThruputQty2 + MS.ThruputQty2Adjustment) >= MR.Qty2 - MR.WarningQty2 THEN 'Pending'\r\n\t\t\t\tWHEN MRB.MaintenanceReqName IS NOT NULL THEN 'Active'\r\n                WHEN MRB.MaintenanceReqName IS NULL THEN '-'\r\n\t\t\t\tELSE NULL END MaintenanceStatus\r\n\tFROM\r\n\t\t[ExCoreOLTP].[ExCoreOLTPSchema].ResourceDef R\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ChangeStatus CS ON R.ChangeStatusId = CS.ChangeStatusId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ResourceFamily RF ON R.ResourceFamilyId = RF.ResourceFamilyId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ResourceType RT ON R.ResourceTypeId = RT.ResourceTypeId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ProductionStatus PS ON R.ProductionStatusId = PS.ProductionStatusId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].Factory F ON R.FactoryId = F.FactoryId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].Container C ON PS.ContainerId = C.ContainerId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ResourceStatusCode RSC ON PS.StatusId = RSC.ResourceStatusCodeId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ResourceStatusReason RSR ON PS.ReasonId = RSR.ResourceStatusReasonId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ProductBase PB ON PS.ProductBaseId = PB.ProductBaseId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].Product P ON PB.RevOfRcdId = P.ProductId OR PS.ProductId = P.ProductId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].ProductBase PB2 ON P.ProductBaseId = PB2.ProductBaseId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].MfgOrder C_MO ON C.MfgOrderId = C_MO.MfgOrderId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].AssignedMaintReq AMR ON R.ResourceId = AMR.ParentId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].MaintenanceStatus MS ON AMR.AssignedMaintReqId = MS.AssignedMaintReqId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].MaintenanceReq MR ON AMR.MaintenanceReqId = MR.MaintenanceReqId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].MaintenanceReqBase MRB ON MR.MaintenanceReqBaseId = MRB.MaintenanceReqBaseId\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].CDODefinition MR_CD ON MR.CDOTypeId = MR_CD.CDODefID\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].Labels L ON MR_CD.DisplayNameLabelId = L.LabelID\r\n\t\tLEFT OUTER JOIN [ExCoreOLTP].[ExCoreOLTPSchema].MaintenanceClass MC ON R.MaintenanceClassId = MC.MaintenanceClassId",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Resource Status Details",
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2023-04-26T23:36:21.000Z",
+    "to": "2023-07-10T22:18:58.000Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Opcenter Status",
+  "uid": "cffda999-39d9-4277-9aff-3cd4bad47409",
+  "version": 6,
+  "weekStart": ""
+}
