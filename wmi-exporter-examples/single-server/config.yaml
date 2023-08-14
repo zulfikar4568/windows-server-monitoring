@@ -1,0 +1,15 @@
+collectors:
+  enabled: cpu,cpu_info,cs,logical_disk,memory,net,os,service,system,process,iis,time,mssql
+collector:
+  service:
+    services-where: "Name='MSSQLSERVER' OR Name='SQLBrowser' OR Name='SQLSERVERAGENT' OR Name='SQLTELEMETRY' OR Name='SQLWriter' OR Name='W3SVC' OR  Name='AppHostSVC' OR Name='IISADMIN' OR Name='MSFTPSVC' OR Name='MWMSVC' OR Name='WAS' OR Name='FTPSVC' OR Name='Opcenter Connect MOM Channel Adapter Host' OR Name='Opcenter Connect MOM Client Gateway'"
+  process:
+    include: "^SQLAGENT|^sqlbrowser|^sqlceip|^sqlservr|^sqlwriter|^w3wp|^W3WP|^CamstarNotificationServer|^ugslmd|^MIOClientGatewayService|^CIOAdapterHostService"
+  mssql:
+    classes-enabled: accessmethods,availreplica,bufman,databases,dbreplica,genstats,locks,memmgr,sqlstats,sqlerrors,transactions,waitstats
+  textfile:
+    directory: "C:\\custom_metrics"
+telemetry:
+  path: "/metrics"
+web:
+  listen-address: ":9182"
