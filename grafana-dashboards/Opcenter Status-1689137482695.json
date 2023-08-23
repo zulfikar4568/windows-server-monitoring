@@ -326,7 +326,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 11,
+        "w": 14,
         "x": 10,
         "y": 0
       },
@@ -387,6 +387,99 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 20,
+        "x": 0,
+        "y": 6
+      },
+      "id": 8,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "dataset": "ExCoreOLTP",
+          "datasource": {
+            "type": "mssql",
+            "uid": "a251e9f1-29d6-48e7-86d1-dfb72860351f"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawSql": "SELECT TOP(50) * FROM ExCoreOLTP.ExCoreOLTPSchema.ActiveUserSession ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "*",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "ExCoreOLTPSchema.ActiveUserSession"
+        }
+      ],
+      "title": "User Session",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "a251e9f1-29d6-48e7-86d1-dfb72860351f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "continuous-GrYlRd"
           },
           "mappings": [],
@@ -412,10 +505,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 21,
-        "y": 0
+        "h": 11,
+        "w": 4,
+        "x": 20,
+        "y": 6
       },
       "id": 1,
       "options": {
@@ -571,7 +664,7 @@
         "h": 17,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 17
       },
       "id": 4,
       "options": {
@@ -643,8 +736,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -740,7 +832,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 34
       },
       "id": 5,
       "options": {
@@ -791,7 +883,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": "5s",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -806,6 +898,6 @@
   "timezone": "",
   "title": "Opcenter Status",
   "uid": "cffda999-39d9-4277-9aff-3cd4bad47409",
-  "version": 8,
+  "version": 10,
   "weekStart": ""
 }
