@@ -27,10 +27,11 @@
         "type": "mssql",
         "uid": "a251e9f1-29d6-48e7-86d1-dfb72860351f"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -41,30 +42,25 @@
                 "value": null
               },
               {
-                "color": "#EAB839",
-                "value": 5
-              },
-              {
                 "color": "red",
-                "value": 8
+                "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 3,
+        "w": 4,
         "x": 0,
         "y": 0
       },
-      "id": 1,
+      "id": 7,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
-        "justifyMode": "center",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -83,31 +79,31 @@
             "type": "mssql",
             "uid": "a251e9f1-29d6-48e7-86d1-dfb72860351f"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT TOP(50) COUNT(*) FROM ExCoreOLTP.ExCoreOLTPSchema.ActiveUserSession ",
+          "rawSql": "select \r\n  (select COUNT(*) from ExCoreOLTP.ExCoreOLTPSchema.DataStoreInserts1)\r\n  +\r\n  (select COUNT(*) from ExCoreOLTP.ExCoreOLTPSchema.DataStoreInserts1Master)\r\n  +\r\n  (select COUNT(*) from ExCoreOLTP.ExCoreOLTPSchema.DataStoreInserts2)\r\n  +\r\n  (select COUNT(*) from ExCoreOLTP.ExCoreOLTPSchema.DataStoreInserts2Master)\r\n  +\r\n  (select COUNT(*) from ExCoreOLTP.ExCoreOLTPSchema.DataStoreUpdates)\r\n  +\r\n  (select COUNT(*) from ExCoreOLTP.ExCoreOLTPSchema.DataStoreUpdatesMaster)",
           "refId": "A",
           "sql": {
             "columns": [
               {
-                "name": "COUNT",
-                "parameters": [
-                  {
-                    "name": "*",
-                    "type": "functionParameter"
-                  }
-                ],
+                "parameters": [],
                 "type": "function"
               }
             ],
-            "groupBy": [],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
             "limit": 50
-          },
-          "table": "ExCoreOLTPSchema.ActiveUserSession"
+          }
         }
       ],
-      "title": "License Usage",
+      "title": "ODS Un-Sync Total",
       "type": "stat"
     },
     {
@@ -151,7 +147,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 3,
+        "x": 4,
         "y": 0
       },
       "id": 6,
@@ -237,8 +233,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 4,
-        "x": 6,
+        "w": 3,
+        "x": 7,
         "y": 0
       },
       "id": 2,
@@ -330,7 +326,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 14,
+        "w": 11,
         "x": 10,
         "y": 0
       },
@@ -381,6 +377,94 @@
         }
       ],
       "title": "Resource Status Availability Counter",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mssql",
+        "uid": "a251e9f1-29d6-48e7-86d1-dfb72860351f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 8
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "dataset": "ExCoreOLTP",
+          "datasource": {
+            "type": "mssql",
+            "uid": "a251e9f1-29d6-48e7-86d1-dfb72860351f"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT TOP(50) COUNT(*) FROM ExCoreOLTP.ExCoreOLTPSchema.ActiveUserSession ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "name": "COUNT",
+                "parameters": [
+                  {
+                    "name": "*",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [],
+            "limit": 50
+          },
+          "table": "ExCoreOLTPSchema.ActiveUserSession"
+        }
+      ],
+      "title": "License Usage",
       "type": "stat"
     },
     {
@@ -715,13 +799,13 @@
     "list": []
   },
   "time": {
-    "from": "2023-04-26T23:36:21.000Z",
-    "to": "2023-07-10T22:18:58.000Z"
+    "from": "now-5m",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Opcenter Status",
   "uid": "cffda999-39d9-4277-9aff-3cd4bad47409",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
