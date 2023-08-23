@@ -470,11 +470,22 @@ cd C:\Program Files\GrafanaLabs\grafana\bin
 grafana-cli.exe plugins install grafana-image-renderer
 ```
 
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/16353495-41d8-4591-81b7-c778fe4115e5)
+
+
 Then Refresh the Grafana Service
+
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/9448a0a6-c754-4ba0-828f-a37dd3e85794)
+
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/60c24edf-2186-42b3-ae43-e458d882f2dd)
+
 
 ### Install MiTex
 Download Binary file and install it.
 You need to set environment variables. PATH -> C:\Program Files\MiKTeX\miktex\bin\x64
+
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/0276d722-8c5e-4536-8ab3-45e58ebcd5eb)
+
 
 ### Install Grafana Reporter
 Move the binary file to `C:\Program Files\Grafana Report\grafana-reporter.exe`
@@ -483,12 +494,24 @@ nssm.exe install grafana-reporter "C:\Program Files\Grafana Report\grafana-repor
 sc start grafana-reporter
 ```
 
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/7093399a-217b-4f26-a29c-a2acacf1edff)
+
+
 ## You need to Create Service Account in Grafana
 Open Grafana Dashboard. 
 
 Home > Administration > Service accounts > Create service account.
 
-Then Create api Token.
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/3ff934a5-3bf4-4eb7-98ed-d89d3b555555)
 
-Then Create Link for your dashboard
+Then Create api Token in service account.
+
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/a7c3507b-84b9-45dc-b2fa-596412059fd8)
+
+Then Create Link for your dashboard.
+Home > Dashboards > Opcenter > WMI Server Opcenter Dashboard > Links
+`http://localhost:8686/api/v5/report/<your id dashboard>?apitoken=<your api token>`
+
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/b0b8827b-6b2a-4ead-8ab7-e60f408b7731)
+
 
