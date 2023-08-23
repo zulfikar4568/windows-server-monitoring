@@ -454,3 +454,41 @@ Try to shutdown the windows exporter
 
 you should see the message on email, something like this
 ![image](https://user-images.githubusercontent.com/64786139/250148629-2aaee36e-9c33-49f3-add3-98a3a6b51ef6.png)
+
+
+## Install Grafana Report
+You need to install few dependencies
+- Grafana Image Renderer: [Link](https://grafana.com/grafana/plugins/grafana-image-renderer/)
+- MiTex: [Link](https://miktex.org/download)
+- Garfana Reporter [Link](https://github.com/IzakMarais/reporter/releases/tag/v2.3.1)
+
+### How to Install Grafana Image Renderer
+
+Install Plugin Open CMD as Administrator
+```
+cd C:\Program Files\GrafanaLabs\grafana\bin
+grafana-cli.exe plugins install grafana-image-renderer
+```
+
+Then Refresh the Grafana Service
+
+### Install MiTex
+Download Binary file and install it.
+You need to set environment variables. PATH -> C:\Program Files\MiKTeX\miktex\bin\x64
+
+### Install Grafana Reporter
+Move the binary file to `C:\Program Files\Grafana Report\grafana-reporter.exe`
+```
+nssm.exe install grafana-reporter "C:\Program Files\Grafana Report\grafana-reporter.exe"
+sc start grafana-reporter
+```
+
+## You need to Create Service Account in Grafana
+Open Grafana Dashboard. 
+
+Home > Administration > Service accounts > Create service account.
+
+Then Create api Token.
+
+Then Create Link for your dashboard
+
