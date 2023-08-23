@@ -514,4 +514,5 @@ Home > Dashboards > Opcenter > WMI Server Opcenter Dashboard > Links
 
 ![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/b0b8827b-6b2a-4ead-8ab7-e60f408b7731)
 
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/28f6a95b-4ba2-46b9-a178-6b52084c9ff0)
 
