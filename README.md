@@ -484,8 +484,7 @@ Then Refresh the Grafana Service
 Download Binary file and install it.
 You need to set environment variables. PATH -> C:\Program Files\MiKTeX\miktex\bin\x64
 
-![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/0276d722-8c5e-4536-8ab3-45e58ebcd5eb)
-
+![image](https://github.com/zulfikar4568/windows-server-monitoring/assets/64786139/9113dc84-b022-4ae2-a99f-179dfe768c87)
 
 ### Install Grafana Reporter
 Move the binary file to `C:\Program Files\Grafana Report\grafana-reporter.exe`
